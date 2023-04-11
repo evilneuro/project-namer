@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cd "$(dirname "${0}")" || exit
+if [ -s adjectives.txt ] && [ -s nouns.txt ]
+then
+	echo "$(shuf -n 1 adjectives.txt) $(shuf -n 1 nouns.txt)" | tr '[:lower:]' '[:upper:]'
+fi
