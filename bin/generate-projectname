@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "${0}")" || exit
-if [ -s adjectives.txt ] && [ -s nouns.txt ]
+APP_DIR=$(realpath "$(dirname "${0}")" | rev | cut -d/ -f2- | rev)
+ADJS_FILE=${APP_DIR}/etc/adjectives.txt
+NOUN_FILE=${APP_DIR}/etc/nouns.txt
+cd "${APP_DATA}" || exit
+if [ -s ${ADJS_FILE} ] && [ -s ${NOUN_FILE} ]
 then
-	echo "$(shuf -n 1 adjectives.txt) $(shuf -n 1 nouns.txt)" | tr '[:lower:]' '[:upper:]'
+	echo "$(shuf -n 1 ${ADJS_FILE}) $(shuf -n 1 ${NOUN_FILE})" | tr '[:lower:]' '[:upper:]'
 fi
