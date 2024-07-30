@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+check_command_in_path () {
+    which "${1}" >/dev/null 2>&1 || ( echo "$(basename "${0}"): can't find ${1} in path; please ensure it is installed"; exit 1 )
+}
+for COMMAND_CHECK in cut rev shuf realpath 
+do
+    set -e ; check_command_in_path ${COMMAND_CHECK} ; set +e
+done
+
 APP_DIR=$(realpath "$(dirname "${0}")" | rev | cut -d/ -f2- | rev)
 ADJS_FILE=${APP_DIR}/etc/adjectives.txt
 NOUN_FILE=${APP_DIR}/etc/nouns.txt
